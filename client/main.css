@@ -1,0 +1,52 @@
+/* Remove default margins and padding */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, sans-serif;
+}
+
+/* disable browser auto-fill highlighting */
+input:-webkit-autofill {
+    -webkit-box-shadow:0 0 0 50px white inset; /* Change the color to your own background color */
+    -webkit-text-fill-color: #333;
+}
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0,0 0 0 50px white inset;
+    -webkit-text-fill-color: #333;
+}
+
+
+#visual-explorer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+.year-slider {
+    position: relative;
+    flex-basis: 400px;
+    text-align: center;
+}
+
+.delta-toggle {
+    width: 200px;
+    float: left;
+}
+
+.age-band-selector {
+
+}
+
+.age-band-display {
+
+}
+
+.leaflet-container {
+    height: 400px;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+    border-radius: 2px;
+}
