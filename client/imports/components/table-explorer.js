@@ -42,7 +42,7 @@ class TableExplorer extends React.Component {
   }
 
   addYear(year) {
-    if (!_.includes(this.state.years), year) {
+    if (!_.includes(this.state.years, year)) {
       this.setState({
         years: this.state.years.concat(year)
       });
@@ -69,7 +69,7 @@ class TableExplorer extends React.Component {
 
   addAgeBand(age_band) {
     if (this.state.aggAge) {
-      if (!_.includes(this.state.age_bands), age_band) {
+      if (!_.includes(this.state.age_bands, age_band)) {
         if (age_band === "All Ages") this.setState({age_bands: ["All Ages"]});
         else {
           if (_.includes(this.state.age_bands, "All Ages")) this.setState({age_bands: [age_band]});
@@ -95,7 +95,7 @@ class TableExplorer extends React.Component {
   }
 
   addLsoa(lsoaId) {
-    if (!_.includes(this.state.lsoaIds), lsoaId) {
+    if (!_.includes(this.state.lsoaIds, lsoaId)) {
       this.setState({
         lsoaIds: this.state.lsoaIds.concat(lsoaId)
       });

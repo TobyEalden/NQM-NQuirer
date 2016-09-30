@@ -40,6 +40,9 @@ class Layout extends React.Component{
     FlowRouter.go("table");
   }
 
+  plan() {
+    FlowRouter.go("planner");
+  }
   render() {
     var styles = {
       appBar: {
@@ -73,9 +76,7 @@ class Layout extends React.Component{
                   initiallyOpen={true}
                   nestedItems={[<ListItem key="visual" primaryText="Visualise" onTouchTap={this.visualise} rightIcon={<Visualise />} />,<ListItem key="table" primaryText="Table View" onTouchTap={this.table} rightIcon={<TableIcon />} />]}/>
               <Divider />
-                <ListItem key="regionView" onTouchTap={this.regionView} primaryText="Region View" rightIcon={<ZoomOut />} />
-                <ListItem key="tableView" onTouchTap={this.tableView} primaryText="Table View" rightIcon={<TableIcon />} />
-                <ListItem key="scenarioView" onTouchTap={this.scenarioView} primaryText="Scenario Planner" rightIcon={<Scenarios />} />
+                <ListItem key="scenarioView" onTouchTap={this.plan} primaryText="Scenario Planner" rightIcon={<Scenarios />} />
             </List>
           </div>
           <div style={styles.layoutContent}>

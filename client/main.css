@@ -43,17 +43,39 @@ input:-webkit-autofill:focus {
 }
 
 .age-band-display {
-
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
 }
 
 .year-selector {
-
+    
 }
 
 .year-display {
-
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
 }
 
+.lsoa-display {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+.lsoa-selector {
+    
+}
 
 .leaflet-container {
     min-height: 1080px;
@@ -113,6 +135,10 @@ input:-webkit-autofill:focus {
     margin-bottom: 10px;
 }
 
+#scenario-list {
+    
+}
+
 /* Side Menu */
 
 #side-menu {
@@ -156,9 +182,8 @@ tr {
   border-top: 1px solid #C1C3D1;
   border-bottom-: 1px solid #C1C3D1;
   color:#666B85;
-  
-
 }
+
 tr:first-child {
   border-top:none;
 }

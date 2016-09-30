@@ -66,7 +66,7 @@ class VisualExplorer extends React.Component {
   }
 
   addAgeBand(age_band) {
-    if (!_.includes(this.state.age_bands), age_band) {
+    if (!_.includes(this.state.age_bands, age_band)) {
       if (age_band === "All Ages") this.setState({age_bands: ["All Ages"]});
       else {
         if (_.includes(this.state.age_bands, "All Ages")) this.setState({age_bands: [age_band]});
