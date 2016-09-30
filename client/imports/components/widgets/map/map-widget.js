@@ -4,10 +4,6 @@ import MapContainer from "./map-container";
 
 class MapWidget extends React.Component {
   
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     let gender = [];
     if (this.props.male) gender.push("male");

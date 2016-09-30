@@ -36,6 +36,10 @@ class Layout extends React.Component{
     FlowRouter.go("root");
   }
 
+  table() {
+    FlowRouter.go("table");
+  }
+
   render() {
     var styles = {
       appBar: {
@@ -67,7 +71,7 @@ class Layout extends React.Component{
             <List>
               <ListItem key="explore" primaryText="Explore" 
                   initiallyOpen={true}
-                  nestedItems={[<ListItem key="visual" primaryText="Visualise" onTouchTap={this.visualise} rightIcon={<Visualise />} />,<ListItem key="table" primaryText="Table View" rightIcon={<TableIcon />} />]}/>
+                  nestedItems={[<ListItem key="visual" primaryText="Visualise" onTouchTap={this.visualise} rightIcon={<Visualise />} />,<ListItem key="table" primaryText="Table View" onTouchTap={this.table} rightIcon={<TableIcon />} />]}/>
               <Divider />
                 <ListItem key="regionView" onTouchTap={this.regionView} primaryText="Region View" rightIcon={<ZoomOut />} />
                 <ListItem key="tableView" onTouchTap={this.tableView} primaryText="Table View" rightIcon={<TableIcon />} />

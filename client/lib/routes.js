@@ -5,6 +5,7 @@ import connectionManager from "../imports/connection-manager";
 
 import Layout from "../imports/containers/layout-container";
 import VisualExplorer from "../imports/containers/visual-explorer-container";
+import TableExplorer from "../imports/containers/table-explorer-container";
 
 
 // Register a trigger to be called before every route.
@@ -26,6 +27,13 @@ FlowRouter.route("/", {
   name: "root",
   action: function(params, queryParams) {
     mount(Layout, { content: function() { return <VisualExplorer />; } });
+  }
+});
+
+FlowRouter.route("/table-explorer", {
+  name: "table",
+  action: function(params, queryParams) {
+    mount(Layout, { content: function() { return <TableExplorer />; } });
   }
 });
 
