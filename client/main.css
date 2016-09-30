@@ -23,6 +23,8 @@ input:-webkit-autofill:focus {
     justify-content: space-between;
     align-content: flex-start;
     align-items: flex-start;
+    margin-right: 200px;
+    position: relative;
 }
 
 .year-slider {
@@ -44,9 +46,72 @@ input:-webkit-autofill:focus {
 
 }
 
+.year-selector {
+
+}
+
+.year-display {
+
+}
+
+
 .leaflet-container {
-    height: 400px;
+    min-height: 1080px;
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
     border-radius: 2px;
+}
+
+.pyramid-widget {
+    position: absolute;
+    right: 20px;
+}
+
+.timeline-widget {
+    position: absolute;
+    right: 20px;
+    top: 330px;
+}
+
+.detail-widget {
+    position: absolute;
+    right: 20px;
+    top: 620px;
+}
+
+.visual-controls {
+}
+
+#control-toggle {
+    position: absolute;
+    right: 20px;
+    top: 740px;
+}
+
+#table-explorer {
+
+}
+
+/* Side Menu */
+
+#side-menu {
+    float: right;
+}
+
+
+/* D3 styling */
+.axis line,
+.axis path {
+  shape-rendering: crispEdges;
+  fill: transparent;
+  stroke: #555;
+}
+.axis text {
+  font-size: 11px;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
 }

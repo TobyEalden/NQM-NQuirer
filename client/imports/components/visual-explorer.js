@@ -7,8 +7,13 @@ import AgeBandSelector from "./controls/age-band-selector";
 import AgeBandDisplay from "./controls/age-band-display";
 import Toggle from "material-ui/Toggle";
 import Checkbox from "material-ui/Checkbox";
+import Drawer from "material-ui/Drawer";
+import RaisedButton from "material-ui/RaisedButton";
 
 import MapWidget from "./widgets/map/map-widget";
+import PyramidWidget from "./widgets/pyramid/pyramid-widget";
+import TimelineWidget from "./widgets/timeline/timeline-widget";
+import DetailWidget from "./widgets/detail/detail-widget";
 
 
 class VisualExplorer extends React.Component {
@@ -21,7 +26,8 @@ class VisualExplorer extends React.Component {
       female: true,
       age_bands: ["All Ages"],
       year: new Date().getFullYear().toString(),
-      lsoaId: props.userData.RegionId
+      lsoaId: "E01022561",
+      showControls: false
     };
 
     this.updateYear = this.updateYear.bind(this);
@@ -31,6 +37,7 @@ class VisualExplorer extends React.Component {
     this.addAgeBand = this.addAgeBand.bind(this);
     this.removeAgeBand = this.removeAgeBand.bind(this);
     this.setLsoa = this.setLsoa.bind(this);
+    this.toggleControls = this.toggleControls.bind(this);
 
   }
 
@@ -82,17 +89,32 @@ class VisualExplorer extends React.Component {
     });
   }
 
+  toggleControls() {
+    this.setState({
+      showControls: !this.state.showControls
+    });
+  }
   render() {
 
     return (
       <div id="visual-explorer">
-        <YearSlider currentYear={parseInt(this.state.year, 10)} update={this.updateYear} />
-        <Toggle toggled={this.state.delta} onToggle={this.updateDelta} label="Population Deltas" className="delta-toggle" />
-        <Checkbox label="Male" checked={this.state.male} onCheck={this.updateMale} disabled={this.state.female ? false : true} />
-        <Checkbox label="Female" checked={this.state.female} onCheck={this.updateFemale} disabled={this.state.male ? false : true} />
-        <AgeBandSelector update={this.addAgeBand} age_bands={Meteor.settings.public.age_bands.concat(["All Ages"])} />
-        <AgeBandDisplay update={this.removeAgeBand} selected={this.state.age_bands} />
+
+        <Drawer className="visual-controls" open={this.state.showControls}>
+          <YearSlider currentYear={parseInt(this.state.year, 10)} update={this.updateYear} />
+          <Toggle toggled={this.state.delta} onToggle={this.updateDelta} label="Population Deltas" className="delta-toggle" />
+          <Checkbox label="Male" checked={this.state.male} onCheck={this.updateMale} disabled={this.state.female ? false : true} />
+          <Checkbox label="Female" checked={this.state.female} onCheck={this.updateFemale} disabled={this.state.male ? false : true} />
+          <AgeBandSelector update={this.addAgeBand} age_bands={Meteor.settings.public.age_bands.concat(["All Ages"])} />
+          <AgeBandDisplay update={this.removeAgeBand} selected={this.state.age_bands} />
+        </Drawer>
+        
         <MapWidget delta={this.state.delta} age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} lsoaId={this.state.lsoaId} regionId={this.props.userData.RegionId} popletDatasetId={this.props.userData.PopletDatasetId} update={this.setLsoa} />
+        <PyramidWidget wgtId="py1" age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} lsoaId={this.state.lsoaId} popletDatasetId={this.props.userData.PopletDatasetId} />
+        <TimelineWidget wgtId="tl1" age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} lsoaId={this.state.lsoaId} popletDatasetId={this.props.userData.PopletDatasetId} />
+        <DetailWidget lsoaId={this.state.lsoaId} />
+        <div id="control-toggle">
+          <RaisedButton label="Toggle Controls" onTouchTap={this.toggleControls} />
+        </div>
       </div>
     );
   }

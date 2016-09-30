@@ -21,12 +21,10 @@ function loadMapData({popletDatasetId, dataPipeline, geoPipeline}, onData) {
         else {
           const geojson = response.data;
           dataPipeline = dataPipeline.replace("#area_ids#", JSON.stringify(lsoaArray));
-          console.log(dataPipeline);
-          console.log(popletDatasetId);
           api.getAggregateData(popletDatasetId, dataPipeline, {limit: 5000}, (err, response) => {
             if(err) console.log("Failed to get map data: ", err);
             else {
-              console.log(response);
+
               onData(null, {geojson: geojson, data: response.data});
             }
           });

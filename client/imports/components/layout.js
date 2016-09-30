@@ -7,6 +7,14 @@ import Login from "./login";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import AppBar from "material-ui/AppBar";
 import IconButton from "material-ui/IconButton";
+import {List, ListItem} from "material-ui/List";
+import Divider from "material-ui/Divider";
+import Visualise from "material-ui/svg-icons/action/visibility";
+import GP from "material-ui/svg-icons/maps/local-hospital";
+import School from "material-ui/svg-icons/maps/local-library";
+import ZoomOut from "material-ui/svg-icons/maps/zoom-out-map";
+import TableIcon from "material-ui/svg-icons/action/view-list";
+import Scenarios from "material-ui/svg-icons/social/group-add";
 
 class Layout extends React.Component{
   constructor(props) {
@@ -23,6 +31,11 @@ class Layout extends React.Component{
   _onLogout() {
     FlowRouter.go("logout");
   }
+
+  visualise() {
+    FlowRouter.go("root");
+  }
+
   render() {
     var styles = {
       appBar: {
@@ -50,6 +63,17 @@ class Layout extends React.Component{
       <MuiThemeProvider>
         <div>
           <AppBar style={styles.appBar} title="NQuirer" showMenuIconButton={false} iconElementRight={logoutButton} />
+          <div id="side-menu" style={styles.layoutContent}>
+            <List>
+              <ListItem key="explore" primaryText="Explore" 
+                  initiallyOpen={true}
+                  nestedItems={[<ListItem key="visual" primaryText="Visualise" onTouchTap={this.visualise} rightIcon={<Visualise />} />,<ListItem key="table" primaryText="Table View" rightIcon={<TableIcon />} />]}/>
+              <Divider />
+                <ListItem key="regionView" onTouchTap={this.regionView} primaryText="Region View" rightIcon={<ZoomOut />} />
+                <ListItem key="tableView" onTouchTap={this.tableView} primaryText="Table View" rightIcon={<TableIcon />} />
+                <ListItem key="scenarioView" onTouchTap={this.scenarioView} primaryText="Scenario Planner" rightIcon={<Scenarios />} />
+            </List>
+          </div>
           <div style={styles.layoutContent}>
             {content}
           </div>
