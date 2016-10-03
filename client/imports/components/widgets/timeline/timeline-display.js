@@ -24,7 +24,6 @@ class TimelineDisplay extends React.Component {
   }
 
   draw(props) {
-    console.log(props.data);
 
     let svg = d3.select("#timeline" + this.props.wgtId);
     props.data.sort(function(a,b) {
@@ -94,9 +93,9 @@ class TimelineDisplay extends React.Component {
   }
   
   componentWillReceiveProps(nextProps) {
-
+   // if (nextProps.data != this.props.data) 
+   console.log("Receiving props twice here");
    this.draw(nextProps);
-  
   }
 
   render() {

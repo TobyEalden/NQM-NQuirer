@@ -10,7 +10,6 @@ class TimelineWidget extends React.Component {
     if (this.props.female) gender.push("female");
 
     const pipeline = '[{"$match":{"area_id":{"$eq":"' + this.props.lsoaId + '"},"gender":{"$in":' + JSON.stringify(gender) + '},"age_band":{"$in":' + JSON.stringify(this.props.age_bands) + '}}},{"$group":{"_id":"$year","persons":{"$sum":"$persons"}}}]';
-    console.log(pipeline);
     return (
       <TimelineContainer resourceId={this.props.popletDatasetId} pipeline={pipeline} wgtId={this.props.wgtId} />
     );
