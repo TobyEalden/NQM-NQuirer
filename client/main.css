@@ -154,6 +154,38 @@ input:-webkit-autofill:focus {
     margin-bottom: 10px;
 }
 
+#build-editor {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-items: flex-start;
+    margin-right: 200px;
+    position: relative;
+}
+
+#build-controls {
+    position: absolute;
+    right: 20px;
+    width: 390px;
+    top: 10px;
+}
+
+.table-widget {
+    padding: 5px;
+}
+
+.percentage {
+    width: 60px;
+}
+
+#save-build {
+    position: absolute;
+    right: 20px;
+    top: 760px;
+}
+
 /* Side Menu */
 
 #side-menu {
@@ -217,6 +249,10 @@ td {
   font-size: 80%;
   text-align:left;
   vertical-align:middle;
+}
+
+.table-widget td {
+    padding: 0px;
 }
 
 td:last-child {

@@ -7,6 +7,7 @@ import Layout from "../imports/containers/layout-container";
 import VisualExplorer from "../imports/containers/visual-explorer-container";
 import TableExplorer from "../imports/containers/table-explorer-container";
 import ScenarioPlanner from "../imports/containers/scenario-planner-container";
+import BuildEditor from "../imports/containers/build-editor-container";
 
 
 // Register a trigger to be called before every route.
@@ -42,6 +43,13 @@ FlowRouter.route("/scenario-planner", {
   name: "planner",
   action: function(params, queryParams) {
     mount(Layout, { content: function() { return <ScenarioPlanner />; } });
+  }
+});
+
+FlowRouter.route("/build-editor/:buildId", {
+  name: "builder",
+  action: function(params, queryParams) {
+    mount(Layout, { content: function() { return <BuildEditor resourceId={params.buildId} options={{limit:5000}} />; } });
   }
 });
 

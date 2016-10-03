@@ -20,6 +20,7 @@ class VisualExplorer extends React.Component {
 
   constructor(props) {
     super(props);
+    
     this.state = {
       delta: false,
       male: true,
