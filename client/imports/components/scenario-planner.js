@@ -8,6 +8,7 @@ import TextField from "material-ui/TextField";
 import IconButton from 'material-ui/IconButton';
 import Add from "material-ui/svg-icons/content/add";
 import Snackbar from 'material-ui/Snackbar';
+import Paper from 'material-ui/Paper';
 
 import ScenarioList from "./widgets/scenarioList/scenario-list-container";
 import BuildList from "./widgets/buildList/build-list-container";
@@ -18,7 +19,7 @@ class ScenarioPlanner extends React.Component {
     super(props);
 
     this.state = {
-      scenario: 0,
+      scenario: "",
       scenarioName: "",
       buildName: "",
       resultPop: false,
@@ -45,7 +46,7 @@ class ScenarioPlanner extends React.Component {
       else elem = elem.parentNode;
     }
     this.setState({
-      scenario: parseInt(elem.id, 10)
+      scenario: elem.id
     });
   }
 
@@ -135,65 +136,65 @@ class ScenarioPlanner extends React.Component {
       });
     }
     else {
-       const config = {
-        commandHost: Meteor.settings.public.commandHost,
-        queryHost: Meteor.settings.public.queryHost,
-        accessToken: connectionManager.authToken
-      };
-      const api = new TDXApi(config);
-      api.getDatasetData(this.props.userData.ScenariosDatasetId, null, null, null, (err, response) => {
-        if (err) {
-          this.setState({
-            resultPop: true,
-            message: "Failed to create build: " + err
-          });
-        }
-        else {
-          console.log(response);
-          api.createDataset({ name: this.state.buildName, parentId: response.data[this.state.scenario].scenario_folder, basedOnSchema: "PlanningPoplet"}, (err,id) => {
-            if (err) {
-              this.setState({
-                resultPop: true,
-                message: "Failed to create build: " + err
-              });
-            }
-            else {
-              this.setState({
-                resultPop: true,
-                message: "Created Build"
-              });
-            }
-          });
-        }
-      });
-      
+      if (this.state.scenario === "") {
+        this.setState({
+          resultPop: true,
+          message: "No scenario selected"
+        });
+      }
+      else {
+        const config = {
+          commandHost: Meteor.settings.public.commandHost,
+          queryHost: Meteor.settings.public.queryHost,
+          accessToken: connectionManager.authToken
+        };
+        const api = new TDXApi(config);
+
+        api.createDataset({ name: this.state.buildName, parentId: this.state.scenario, basedOnSchema: "PlanningPoplet"}, (err,id) => {
+          if (err) {
+            this.setState({
+              resultPop: true,
+              message: "Failed to create build: " + err
+            });
+          }
+          else {
+            this.setState({
+              resultPop: true,
+              message: "Created Build"
+            });
+          }
+        });
+  
+      }
     }
   }
 
   render() {
 
     return (
-      <div>
-        <ScenarioList resourceId={this.props.userData.ScenariosDatasetId} filter={{}} options={{}} update={this.changeScenario} currentScenario={this.state.scenario} />
-        <TextField hintText="New Scenario Name" value={this.state.scenarioName} errorText={this.state.scenarioError} onChange={this.scenarioName} />
-        
-        <IconButton onClick={this.addScenario}>
-          <Add />
-        </IconButton>
-        <BuildList resourceId={this.props.userData.ScenariosDatasetId} filter={{}} options={{}} currentScenario={this.state.scenario} update={this.openBuild} />
-        <TextField hintText="New Build Name" value={this.state.buildName} errorText={this.state.buildError} onChange={this.buildName} />
-        <IconButton onClick={this.addBuild}>
-          <Add />
-        </IconButton>
+      <div id="scenario-planner">
+        <Paper className="planner-list" zDepth={2} >
+          <ScenarioList resourceId={this.props.userData.ScenariosDatasetId} filter={{}} options={{}} update={this.changeScenario} currentScenario={this.state.scenario} />
+          <TextField hintText="New Scenario Name" value={this.state.scenarioName} errorText={this.state.scenarioError} onChange={this.scenarioName} />
+          
+          <IconButton onClick={this.addScenario}>
+            <Add />
+          </IconButton>
+        </Paper>
+        <Paper className="planner-list" zDepth={2} >
+          <BuildList resourceId={this.props.userData.ScenariosDatasetId} filter={{}} options={{}} currentScenario={this.state.scenario} update={this.openBuild} />
+          <TextField hintText="New Build Name" value={this.state.buildName} errorText={this.state.buildError} onChange={this.buildName} />
+          <IconButton onClick={this.addBuild}>
+            <Add />
+          </IconButton>
+        </Paper>
         <Snackbar
           open={this.state.resultPop}
           message={this.state.message}
           autoHideDuration={4000}
           onRequestClose={this.handleRequestClose}
         />
-        
-
-        
+          
       </div>
     );
   }

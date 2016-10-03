@@ -14,6 +14,7 @@ class BuildListDisplay extends React.Component {
         id={build.id}
         onTouchTap={this.update}
         primaryText={build.name}
+        rightIcon={<Settings />}
         />
       );
     });

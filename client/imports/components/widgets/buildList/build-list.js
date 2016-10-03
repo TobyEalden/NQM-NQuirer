@@ -5,11 +5,10 @@ import BuildListDisplayContainer from "./build-list-display-container";
 class BuildList extends React.Component {
 
   render() {
-    let folder = "";
-    if (this.props.data[this.props.currentScenario]) folder = this.props.data[this.props.currentScenario].scenario_folder;
+
     const filter = {
       "schemaDefinition.basedOn": "PlanningPoplet",
-      "parents": {"$eq": folder}
+      "parents": {"$eq": this.props.currentScenario}
     };
 
     return (
@@ -22,7 +21,7 @@ class BuildList extends React.Component {
 BuildList.propTypes = {
   data: React.PropTypes.array.isRequired,
   update: React.PropTypes.func.isRequired,
-  currentScenario: React.PropTypes.number.isRequired
+  currentScenario: React.PropTypes.string.isRequired
 };
 
 export default BuildList;

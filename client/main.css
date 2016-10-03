@@ -135,8 +135,23 @@ input:-webkit-autofill:focus {
     margin-bottom: 10px;
 }
 
-#scenario-list {
-    
+#scenario-planner {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+    margin-right: 260px;
+    position: relative;
+}
+
+.planner-list {
+    min-width: 320px;
+    max-width: 320px;
+    margin-right: 10px;
+    padding: 5px;
+    margin-bottom: 10px;
 }
 
 /* Side Menu */
