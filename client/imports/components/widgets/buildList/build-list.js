@@ -5,9 +5,11 @@ import BuildListDisplayContainer from "./build-list-display-container";
 class BuildList extends React.Component {
 
   render() {
+    let folder = "";
+    if (this.props.data[this.props.currentScenario]) folder = this.props.data[this.props.currentScenario].scenario_folder;
     const filter = {
       "schemaDefinition.basedOn": "PlanningPoplet",
-      "parents": {"$eq":this.props.data[this.props.currentScenario].scenario_folder}
+      "parents": {"$eq": folder}
     };
 
     return (

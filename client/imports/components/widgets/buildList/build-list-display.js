@@ -7,7 +7,7 @@ import Subheader from 'material-ui/Subheader';
 class BuildListDisplay extends React.Component {
 
   render() {
-    const builds = _.map(this.props.data, (build, index) => {
+    const builds = _.map(this.props.resources, (build, index) => {
       return (
         <ListItem
         key={build.id}
@@ -31,7 +31,7 @@ class BuildListDisplay extends React.Component {
 }
 
 BuildListDisplay.propTypes = {
-  data: React.PropTypes.array.isRequired,
+  resources: React.PropTypes.array.isRequired,
   update: React.PropTypes.func.isRequired
 };
 
