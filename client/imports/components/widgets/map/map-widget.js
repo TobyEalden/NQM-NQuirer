@@ -31,7 +31,8 @@ MapWidget.propTypes = {
   lsoaId: React.PropTypes.string.isRequired,
   regionId: React.PropTypes.string.isRequired,
   popletDatasetId: React.PropTypes.string.isRequired,
-  update: React.PropTypes.func.isRequired
+  update: React.PropTypes.func.isRequired,
+  centre: React.PropTypes.array.isRequired
 };
 
 export default MapWidget;

@@ -44,7 +44,7 @@ class MapDisplay extends React.Component {
     const url = "https://api.tiles.mapbox.com/v4/" + Meteor.settings.public.mapUsername + "/{z}/{x}/{y}.png?access_token=" + Meteor.settings.public.mapPassword;
     return (
 
-      <Map center={[51, -1.0]} zoom={10} minZoom={10}>
+      <Map center={this.props.centre} zoom={10} minZoom={10}>
         <TileLayer
           url={url}
           attribution='Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>'
@@ -65,7 +65,8 @@ MapDisplay.propTypes = {
   data: React.PropTypes.array.isRequired,
   delta: React.PropTypes.bool.isRequired,
   lsoaId: React.PropTypes.string.isRequired,
-  update: React.PropTypes.func.isRequired
+  update: React.PropTypes.func.isRequired,
+  centre: React.PropTypes.array.isRequired
 };
 
 export default MapDisplay;

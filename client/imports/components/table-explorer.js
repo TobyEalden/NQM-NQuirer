@@ -23,7 +23,7 @@ class TableExplorer extends React.Component {
       female: true,
       age_bands: ["All Ages"],
       years: [new Date().getFullYear().toString()],
-      lsoaIds: ["E01022561"],
+      lsoaIds: [this.props.userData.InitialLsoaId],
       aggAge: true,
       aggGender: true,
       aggLsoas: false

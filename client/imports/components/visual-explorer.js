@@ -27,7 +27,7 @@ class VisualExplorer extends React.Component {
       female: true,
       age_bands: ["All Ages"],
       year: new Date().getFullYear().toString(),
-      lsoaId: "E01022561",
+      lsoaId: this.props.userData.InitialLsoaId,
       showControls: false
     };
 
@@ -96,6 +96,7 @@ class VisualExplorer extends React.Component {
     });
   }
   render() {
+    const popletId = this.props.scenarioPoplet ? this.props.scenarioPoplet : this.props.userData.PopletDatasetId;
 
     return (
       <div id="visual-explorer">
@@ -109,9 +110,9 @@ class VisualExplorer extends React.Component {
           <AgeBandDisplay update={this.removeAgeBand} selected={this.state.age_bands} />
         </Drawer>
         
-        <MapWidget delta={this.state.delta} age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} lsoaId={this.state.lsoaId} regionId={this.props.userData.RegionId} popletDatasetId={this.props.userData.PopletDatasetId} update={this.setLsoa} />
-        <PyramidWidget wgtId="py1" age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} lsoaId={this.state.lsoaId} popletDatasetId={this.props.userData.PopletDatasetId} />
-        <TimelineWidget wgtId="tl1" age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} lsoaId={this.state.lsoaId} popletDatasetId={this.props.userData.PopletDatasetId} />
+        <MapWidget delta={this.state.delta} age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} lsoaId={this.state.lsoaId} regionId={this.props.userData.RegionId} popletDatasetId={popletId} update={this.setLsoa} centre={this.props.userData.GeoCentre} />
+        <PyramidWidget wgtId="py1" age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} lsoaId={this.state.lsoaId} popletDatasetId={popletId} />
+        <TimelineWidget wgtId="tl1" age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} lsoaId={this.state.lsoaId} popletDatasetId={popletId} />
         <DetailWidget lsoaId={this.state.lsoaId} />
         <div id="control-toggle">
           <RaisedButton label="Toggle Controls" onTouchTap={this.toggleControls} />
@@ -123,7 +124,8 @@ class VisualExplorer extends React.Component {
 }
 
 VisualExplorer.propTypes = {
-  userData: React.PropTypes.object.isRequired // This expects user data
+  userData: React.PropTypes.object.isRequired, // This expects user data
+  scenarioPoplet: React.PropTypes.string.isRequired
 };
 
 export default VisualExplorer;

@@ -29,7 +29,7 @@ class BuildEditor extends React.Component {
     super(props);
 
     this.state = {
-      lsoaId: "E01022561",
+      lsoaId: this.props.userData.InitialLsoaId,
       recipe: unpackPoplets(props.data),
       saved: true,
       open: false,
@@ -226,7 +226,7 @@ class BuildEditor extends React.Component {
     return (
       <div id="build-editor">
 
-        <MapWidget delta={false} age_bands={["All Ages"]} male={true} female={false} year={new Date().getFullYear().toString()} lsoaId={this.state.lsoaId} regionId={this.props.userData.RegionId} popletDatasetId={this.props.userData.PopletDatasetId} update={this.setLsoa} />
+        <MapWidget delta={false} age_bands={["All Ages"]} male={true} female={false} year={new Date().getFullYear().toString()} lsoaId={this.state.lsoaId} regionId={this.props.userData.RegionId} popletDatasetId={this.props.userData.PopletDatasetId} update={this.setLsoa} centre={this.props.userData.GeoCentre} />
         <Paper id="build-controls" zDepth={2}>
           <Tabs className="tab-container">
             <Tab icon={<LSOAIcon />} label="LSOAs" >

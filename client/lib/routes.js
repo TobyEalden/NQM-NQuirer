@@ -25,10 +25,10 @@ FlowRouter.triggers.enter([function(context, redirect) {
 }]);
 
 // This is the default route - render the explorer
-FlowRouter.route("/", {
+FlowRouter.route("/:scenarioPoplet", {
   name: "root",
   action: function(params, queryParams) {
-    mount(Layout, { content: function() { return <VisualExplorer />; } });
+    mount(Layout, { content: function() { return <VisualExplorer scenarioPoplet={params.scenarioPoplet}/>; } });
   }
 });
 
