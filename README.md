@@ -31,7 +31,7 @@ curl https://install.meteor.com/ | sh
 clone this repo
 
 ```
-git clone https://github.com/nqminds/nqm-app-minimal-meteor
+git clone https://github.com/IGlautier/NQM-Nquirer
 ```
 
 switch to the application folder
@@ -56,3 +56,10 @@ to use a port other than the default of 3000
 ```
 meteor run --settings ./settings.json --port <port number>
 ```
+
+## usage
+
+Login with a share key:
+
+ID: SklzMJbZC
+PW: 12345
