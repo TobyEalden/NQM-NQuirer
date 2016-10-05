@@ -1,12 +1,12 @@
 {
   "public": {
-    "ddpServerURL": "https://tbx.nqminds.com/",
-    "authServerURL": "https://tdx.nqminds.com",
-    "commandHost": "https://cmd.nqminds.com",
-    "queryHost": "https://q.nqminds.com",
+    "ddpServerURL": "https://tbx.nq-m.com/",
+    "authServerURL": "https://tdx.nq-m.com",
+    "commandHost": "https://cmd.nq-m.com",
+    "queryHost": "https://q.nq-m.com",
     "appFolderId": "BJgnk5Ae0",
-    "regionToLsoaId": "BkWqQQuBo",
-    "geojsonId": "HklvK8y5q",
+    "regionToLsoaId": "SkxyHi_MR",
+    "geojsonId": "ryl5_xKGA",
     "age_bands": ["0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74","75-79","80-84","85-89","90+"],
     "mapUsername": "nqmivan.12id4bh0",
     "mapPassword": "pk.eyJ1IjoibnFtaXZhbiIsImEiOiJjaXJsendoMHMwMDM3aGtuaGh2bWt5OXRvIn0.6iCk2i96NUucsyDlbnVtiA",
