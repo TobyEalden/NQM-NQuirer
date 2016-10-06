@@ -15,6 +15,7 @@ import School from "material-ui/svg-icons/maps/local-library";
 import ZoomOut from "material-ui/svg-icons/maps/zoom-out-map";
 import TableIcon from "material-ui/svg-icons/action/view-list";
 import Scenarios from "material-ui/svg-icons/social/group-add";
+import PhysicalSupportYoung from "material-ui/svg-icons/action/favorite-border";
 
 class Layout extends React.Component{
   constructor(props) {
@@ -34,6 +35,10 @@ class Layout extends React.Component{
 
   visualise() {
     FlowRouter.go("root");
+  }
+
+  physicalYoung() {
+    FlowRouter.go("physicalYoung");
   }
 
   table() {
@@ -76,7 +81,11 @@ class Layout extends React.Component{
                   initiallyOpen={true}
                   nestedItems={[<ListItem key="visual" primaryText="Visualise" onTouchTap={this.visualise} rightIcon={<Visualise />} />,<ListItem key="table" primaryText="Table View" onTouchTap={this.table} rightIcon={<TableIcon />} />]}/>
               <Divider />
-                <ListItem key="scenarioView" onTouchTap={this.plan} primaryText="Scenario Planner" rightIcon={<Scenarios />} />
+              <ListItem key="scenarioView" onTouchTap={this.plan} primaryText="Scenario Planner" rightIcon={<Scenarios />} />
+              <Divider />
+              <ListItem key="demand" primaryText="Data Packs" 
+                  initiallyOpen={true}
+                  nestedItems={[<ListItem key="physicalYoung" primaryText="Physical Support 18-64" onTouchTap={this.physicalYoung} rightIcon={<PhysicalSupportYoung />} />]}/>
             </List>
           </div>
           <div style={styles.layoutContent}>

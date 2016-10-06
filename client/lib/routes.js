@@ -8,6 +8,7 @@ import VisualExplorer from "../imports/containers/visual-explorer-container";
 import TableExplorer from "../imports/containers/table-explorer-container";
 import ScenarioPlanner from "../imports/containers/scenario-planner-container";
 import BuildEditor from "../imports/containers/build-editor-container";
+import PhysicalYoung from "../imports/containers/physical-young-container";
 
 
 // Register a trigger to be called before every route.
@@ -59,6 +60,14 @@ FlowRouter.route("/build-editor/:buildId", {
     mount(Layout, { content: function() { return <BuildEditor resourceId={params.buildId} options={{limit:5000}} />; } });
   }
 });
+
+FlowRouter.route("/demand-pack/physical-support-18-64", {
+  name: "physicalYoung",
+  action: function(params, queryParams) {
+    mount(Layout, { content: function() { return <PhysicalYoung />; } });
+  }
+});
+
 
 // Redirect to the TDX auth server - as configured in the "authServerURL" property in settings.json 
 FlowRouter.route("/auth-server", {

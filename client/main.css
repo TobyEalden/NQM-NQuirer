@@ -186,6 +186,32 @@ input:-webkit-autofill:focus {
     top: 760px;
 }
 
+.demand-pack {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-items: flex-start;
+    margin-right: 200px;
+    position: relative;
+}
+
+.vpp-slider {
+    position: absolute;
+    right: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+.year-slider-standalone {
+    position: absolute;
+    top: 240px;
+    right: 20px;
+    width: 200px;
+    padding: 10px;
+}
+
 /* Side Menu */
 
 #side-menu {
