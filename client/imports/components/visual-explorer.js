@@ -125,7 +125,7 @@ class VisualExplorer extends React.Component {
 
 VisualExplorer.propTypes = {
   userData: React.PropTypes.object.isRequired, // This expects user data
-  scenarioPoplet: React.PropTypes.string.isRequired
+  scenarioPoplet: React.PropTypes.string
 };
 
 export default VisualExplorer;

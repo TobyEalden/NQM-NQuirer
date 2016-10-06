@@ -11,7 +11,7 @@ function loadUserData({}, onData) {
   const api = new TDXApi(config);
 
   api.getDatasets({"parents": {"$in":[Meteor.settings.public.appFolderId]}, "schemaDefinition.basedOn": "Nquireruserinfo"}, null, null, (err, response) => {
-    if (err) console.log("Could not find user in database");
+    if (err) console.log("Could not find user in database ", err);
     else {
       api.getDatasetData(response[0].id, null, null, null, (err, response) => {
         if (err) console.log("Failed to get data: ", err);

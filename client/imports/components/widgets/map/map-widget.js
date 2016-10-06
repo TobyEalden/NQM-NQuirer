@@ -15,7 +15,7 @@ class MapWidget extends React.Component {
     const geoPipeline = '[{"$match":{"parent_id":"' + this.props.regionId + '","child_type":"LSOA11CD"}},{"$group":{"_id":null,"id_array":{"$push":"$child_id"}}}]';
 
     return (
-      <MapContainer popletDatasetId={this.props.popletDatasetId} dataPipeline={dataPipeline} geoPipeline={geoPipeline} lsoaId={this.props.lsoaId} update={this.props.update} delta={this.props.delta} />
+      <MapContainer popletDatasetId={this.props.popletDatasetId} dataPipeline={dataPipeline} geoPipeline={geoPipeline} lsoaId={this.props.lsoaId} update={this.props.update} delta={this.props.delta} centre={this.props.centre} />
     );
   }
 
