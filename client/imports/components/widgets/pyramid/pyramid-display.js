@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from "material-ui/Card";
+import Paper from "material-ui/Paper";
 
 class PyramidDisplay extends React.Component {
 
@@ -196,9 +196,9 @@ class PyramidDisplay extends React.Component {
   render() {
 
     return (
-      <Card className="pyramid-widget">
+      <Paper className="pyramid-widget">
         <svg id={"pyramid" + this.props.wgtId}></svg>
-      </Card>
+      </Paper>
     );
   }
 

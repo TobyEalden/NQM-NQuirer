@@ -125,6 +125,13 @@ class ScenarioPlanner extends React.Component {
   };
 
   openBuild(event) {
+    let found = false;
+    let elem = event.target.parentNode;
+    while (!found) {
+      if (elem.id != "") found = true;
+      else elem = elem.parentNode;
+    }
+    FlowRouter.go("builder", {buildId: elem.id});
 
   }
 

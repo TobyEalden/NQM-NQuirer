@@ -12,7 +12,7 @@ class BuildListDisplay extends React.Component {
         <ListItem
         key={build.id}
         id={build.id}
-        onTouchTap={this.update}
+        onTouchTap={this.props.update}
         primaryText={build.name}
         rightIcon={<Settings />}
         />

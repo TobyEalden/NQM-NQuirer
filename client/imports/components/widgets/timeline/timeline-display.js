@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Paper from 'material-ui/Paper';
 
 class TimelineDisplay extends React.Component {
 
@@ -101,9 +101,9 @@ class TimelineDisplay extends React.Component {
   render() {
 
     return (
-      <Card className="timeline-widget">
+      <Paper className="timeline-widget">
         <svg id={"timeline" + this.props.wgtId}></svg>
-      </Card>
+      </Paper>
 
     );
   }
