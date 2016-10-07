@@ -12,6 +12,8 @@ import Paper from "material-ui/Paper";
 
 import MapWidget from "../widgets/physicalSupportMap/physical-map-widget";
 import VppSlider from "../widgets/vppSlider/vpp-slider-widget";
+import PyramidWidget from "../widgets/pyramid/pyramid-widget";
+import TimelineWidget from "../widgets/costTimeline/cost-timeline-widget";
 
 class PhysicalYoung extends React.Component {
 
@@ -110,12 +112,19 @@ class PhysicalYoung extends React.Component {
 
 
         <MapWidget age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} lsoaId={this.state.lsoaId} regionId={this.props.userData.RegionId} popletDatasetId={this.props.userData.PopletDatasetId} update={this.setLsoa} centre={this.props.userData.GeoCentre} vpp={this.state.vpp}/>
-        <VppSlider vpp={this.state.vpp} update={this.updateVpp} regionId={this.props.userData.RegionId} age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} popletDatasetId={this.props.userData.PopletDatasetId}/>
-        <Paper className="year-slider-standalone">
-          <YearSlider currentYear={parseInt(this.state.year, 10)} update={this.updateYear} />
-        </Paper>
-        <div id="control-toggle">
-          <RaisedButton label="Toggle Controls" onTouchTap={this.toggleControls} />
+        <div id="widgets">
+          <VppSlider vpp={this.state.vpp} update={this.updateVpp} regionId={this.props.userData.RegionId} age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} popletDatasetId={this.props.userData.PopletDatasetId}/>
+          
+          <Paper className="year-slider-standalone">
+            <YearSlider currentYear={parseInt(this.state.year, 10)} update={this.updateYear} />
+          </Paper>
+          <PyramidWidget wgtId="py1" age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} lsoaId={this.state.lsoaId} popletDatasetId={this.props.userData.PopletDatasetId} />
+
+          <TimelineWidget wgtId="ctmln1" age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} popletDatasetId={this.props.userData.PopletDatasetId} regionId={this.props.userData.RegionId} vpp={this.state.vpp} />
+          
+          <div id="control-toggle">
+            <RaisedButton label="Toggle Controls" onTouchTap={this.toggleControls} />
+          </div>
         </div>
       </div>
     );

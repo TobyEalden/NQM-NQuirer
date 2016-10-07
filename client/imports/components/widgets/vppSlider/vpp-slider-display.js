@@ -29,22 +29,28 @@ class VppSlider extends React.Component {
     
     return (
       <Paper className="vpp-slider">
-        <p>Marginal Cost: £{marginalCost}, Fixed Cost: £{fixedCost}, Total Cost: £{data.value}</p>
-        <p >
-          £{data.value_pp}
-        </p>
-        <Slider
-          min={0}
-          max={data.value/persons}
-          step={0.01}
-          value={this.props.vpp}
-          onChange={this.handleSlider}
-          style={styles.slider}
-          axis="y"
-        />
-        <p>
-          £{this.props.vpp}
-        </p>
+        <div id="vpp-info">
+          <p>Marginal Cost: £{Math.round(marginalCost/100000)/10} millions
+           Fixed Cost: £{Math.round(fixedCost/100000)/10} millions
+            Total Cost: £{Math.round(data.value/100000)/10} millions</p>
+        </div>
+        <div id="vpp-control">
+          <p >
+            £{data.value_pp}
+          </p>
+          <Slider
+            min={0}
+            max={data.value/persons}
+            step={0.01}
+            value={this.props.vpp}
+            onChange={this.handleSlider}
+            style={styles.slider}
+            axis="y"
+          />
+          <p>
+            £{this.props.vpp}
+          </p>
+        </div>
 
       </Paper>
     );

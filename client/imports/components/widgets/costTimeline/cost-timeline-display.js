@@ -3,7 +3,7 @@ _ = lodash;
 
 import Paper from "material-ui/Paper";
 
-class TimelineDisplay extends React.Component {
+class CostTimelineDisplay extends React.Component {
 
   constructor(props) {
     super(props);
@@ -25,18 +25,26 @@ class TimelineDisplay extends React.Component {
   }
 
   draw(props) {
-
-    let svg = d3.select("#timeline" + this.props.wgtId);
-    props.data.sort(function(a,b) {
+    const timeline = [];
+    props.years.sort(function(a,b) {
      return a._id - b._id;
+    }); 
+
+    const fixed = props.data[0].value - props.vpp * props.years[0].persons;
+    _.each(props.years, (year) => {
+      const marginal = props.vpp * year.persons;
+      timeline.push({year: year._id, cost: Math.round((marginal + fixed)/100000)/10});
     });
+    console.log(timeline);
+    let svg = d3.select("#timeline" + this.props.wgtId);
+    
 
     let xScale = d3.scale.linear()
-      .domain(d3.extent(props.data, function(d) {return d._id}))
+      .domain(d3.extent(timeline, function(d) {return d.year}))
       .range([0, this.state.width]);
 
     let yScale = d3.scale.linear()
-      .domain([0, d3.max(props.data, function(d) {return d.persons}) * 1.1])
+      .domain([0, d3.max(timeline, function(d) {return d.cost}) * 1.1])
       .range([this.state.height, 0]);
 
     let xAxis = d3.svg.axis()
@@ -51,8 +59,8 @@ class TimelineDisplay extends React.Component {
       .ticks(6, ",f");
     
     let line = d3.svg.line()
-      .x(function(d) { return xScale(d._id); })
-      .y(function(d) { return yScale(d.persons); });
+      .x(function(d) { return xScale(d.year); })
+      .y(function(d) { return yScale(d.cost); });
 
 
     svg.select("#x-axis" + props.wgtId)
@@ -64,7 +72,7 @@ class TimelineDisplay extends React.Component {
       .call(yAxis);
 
     svg.select("#line" + props.wgtId)
-      .datum(props.data)
+      .datum(timeline)
       .transition()
       .duration(500).ease("sin-in-out")
       .attr("class", "line")
@@ -89,13 +97,13 @@ class TimelineDisplay extends React.Component {
     svg.append("path")
       .attr("id", "line" + this.props.wgtId);
 
-   this.draw(this.props);
+    this.draw(this.props);
 
   }
   
   componentWillReceiveProps(nextProps) {
-   if (nextProps.data != this.props.data);
-   //console.log("Receiving props twice here");
+   if (nextProps != this.props) 
+   console.log("Receiving props twice here");
    this.draw(nextProps);
   }
 
@@ -111,9 +119,11 @@ class TimelineDisplay extends React.Component {
 
 }
 
-TimelineDisplay.propTypes = {
+CostTimelineDisplay.propTypes = {
   data: React.PropTypes.array.isRequired,
+  years: React.PropTypes.array.isRequired,
+  vpp: React.PropTypes.number.isRequired,
   wgtId: React.PropTypes.string.isRequired
 };
 
-export default TimelineDisplay;
+export default CostTimelineDisplay;

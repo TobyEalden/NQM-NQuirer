@@ -111,11 +111,13 @@ class VisualExplorer extends React.Component {
         </Drawer>
         
         <MapWidget delta={this.state.delta} age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} lsoaId={this.state.lsoaId} regionId={this.props.userData.RegionId} popletDatasetId={popletId} update={this.setLsoa} centre={this.props.userData.GeoCentre} />
-        <PyramidWidget wgtId="py1" age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} lsoaId={this.state.lsoaId} popletDatasetId={popletId} />
-        <TimelineWidget wgtId="tl1" age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} lsoaId={this.state.lsoaId} popletDatasetId={popletId} />
-        <DetailWidget lsoaId={this.state.lsoaId} />
-        <div id="control-toggle">
-          <RaisedButton label="Toggle Controls" onTouchTap={this.toggleControls} />
+        <div id="widgets">
+          <PyramidWidget wgtId="py1" age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} lsoaId={this.state.lsoaId} popletDatasetId={popletId} />
+          <TimelineWidget wgtId="tl1" age_bands={this.state.age_bands} male={this.state.male} female={this.state.female} year={this.state.year} lsoaId={this.state.lsoaId} popletDatasetId={popletId} />
+          <DetailWidget lsoaId={this.state.lsoaId} />
+          <div id="control-toggle">
+            <RaisedButton label="Toggle Controls" onTouchTap={this.toggleControls} />
+          </div>
         </div>
       </div>
     );
