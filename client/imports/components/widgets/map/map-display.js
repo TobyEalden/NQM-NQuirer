@@ -43,7 +43,6 @@ class MapDisplay extends React.Component {
 
     const url = "https://api.tiles.mapbox.com/v4/" + Meteor.settings.public.mapUsername + "/{z}/{x}/{y}.png?access_token=" + Meteor.settings.public.mapPassword;
     return (
-
       <Map center={this.props.centre} zoom={10} minZoom={10}>
         <TileLayer
           url={url}
@@ -55,8 +54,7 @@ class MapDisplay extends React.Component {
           onEachFeature={this.onEachFeature.bind(this)}
         />
       </Map>
-
-    )
+    );
   }
 }
 

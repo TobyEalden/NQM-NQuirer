@@ -92,8 +92,8 @@ class TableDisplay extends React.Component {
     );
 
     return(
-      <Paper id="table-widget" zDepth={2}>
-        <Table className="table" id="table" itemsPerPage={15} sortable={true}>
+      <div>
+        <Table className="table" id="table" sortable={true}>
           <Thead>
               {headers}
           </Thead>
@@ -102,8 +102,8 @@ class TableDisplay extends React.Component {
 
         </Table>
         <RaisedButton id="export" label="Export To CSV" onClick={this.exportToCSV} />
-      </Paper>
-    )
+      </div>
+    );
   }
 
 }

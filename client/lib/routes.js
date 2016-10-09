@@ -2,6 +2,7 @@ import React from "react";
 import {mount} from "react-mounter";
 import {FlowRouter} from "meteor/kadira:flow-router";
 import connectionManager from "../imports/connection-manager";
+import appUtils from "../imports/app-utils";
 
 import Layout from "../imports/containers/layout-container";
 import VisualExplorer from "../imports/containers/visual-explorer-container";
@@ -25,11 +26,48 @@ FlowRouter.triggers.enter([function(context, redirect) {
   }
 }]);
 
+const onToggleNav = () => {
+  const qp = {};
+  if (FlowRouter.getQueryParam(appUtils.constants.query.viewMode) === "w") {
+    // Handle change in navigation bar docked state.
+    const sideBarOpen = FlowRouter.getQueryParam(appUtils.constants.query.dockedSideBarOpen) || "1";
+    qp[appUtils.constants.query.dockedSideBarOpen] = sideBarOpen === "0" ? 1 : 0;
+    FlowRouter.setQueryParams(qp);
+  } else {
+    // Toggle floating navigation bar state.
+    const sideBarOpen = FlowRouter.getQueryParam(appUtils.constants.query.floatingSideBarOpen) || "0";
+    qp[appUtils.constants.query.floatingSideBarOpen] = sideBarOpen === "0" ? 1 : 0;
+    FlowRouter.setQueryParams(qp);
+  }  
+};
+
+const getRouteDefaults = function(queryParams) {
+  const oldRoute = FlowRouter.current().oldRoute;
+  const defaultViewMode = oldRoute ? oldRoute.getQueryParam(appUtils.constants.query.viewMode) : "w";
+  const defaultDocked = oldRoute ? oldRoute.getQueryParam(appUtils.constants.query.dockedSideBarOpen) : "1";
+  const defaultFloating = oldRoute ? oldRoute.getQueryParam(appUtils.constants.query.floatingSideBarOpen) : "0";
+  
+  const currentDocked = queryParams[appUtils.constants.query.dockedSideBarOpen] || defaultDocked;
+  const currentFloating = queryParams[appUtils.constants.query.floatingSideBarOpen] || defaultFloating;
+  const currentWideMode = queryParams[appUtils.constants.query.viewMode] || defaultViewMode;
+
+  const routeProperties = {};
+  routeProperties.dockedSideBarOpen = currentDocked !== "0";
+  routeProperties.floatingSideBarOpen = currentFloating === "1";
+  routeProperties.wideViewMode = currentWideMode === "w";
+  routeProperties.activeSideBar = queryParams[appUtils.constants.query.sideBarView];
+  routeProperties.onToggleNav = onToggleNav;
+
+  return routeProperties;
+};
+
 // This is the default route - render the explorer
 FlowRouter.route("/", {
   name: "root",
   action: function(params, queryParams) {
-    mount(Layout, { content: function() { return <VisualExplorer scenarioPoplet={params.scenarioPoplet}/>; } });
+    mount(Layout, { onToggleNav: onToggleNav, content: function() {       
+      return <VisualExplorer  scenarioPoplet={params.scenarioPoplet} {...getRouteDefaults(queryParams)} />; 
+    }});
   }
 });
 
@@ -43,14 +81,18 @@ FlowRouter.route("/view-scenario/:scenarioPoplet", {
 FlowRouter.route("/table-explorer", {
   name: "table",
   action: function(params, queryParams) {
-    mount(Layout, { content: function() { return <TableExplorer />; } });
+    mount(Layout, { onToggleNav: onToggleNav, content: function() { 
+      return <TableExplorer {...getRouteDefaults(queryParams)} />;
+    }}); 
   }
 });
 
 FlowRouter.route("/scenario-planner", {
   name: "planner",
   action: function(params, queryParams) {
-    mount(Layout, { content: function() { return <ScenarioPlanner />; } });
+    mount(Layout, { onToggleNav: onToggleNav, content: function() { 
+      return <ScenarioPlanner {...getRouteDefaults(queryParams)} />; 
+    }});
   }
 });
 

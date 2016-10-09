@@ -8,8 +8,6 @@ class TimelineDisplay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: 260,
-      height: 225,
       margin: {
         top: 10,
         right: 40,
@@ -17,6 +15,8 @@ class TimelineDisplay extends React.Component {
         left: 25,
       }
     };
+    this.state.width = props.width - this.state.margin.left - this.state.margin.right;
+    this.state.height = props.height - this.state.margin.top - this.state.margin.bottom;
     this.draw = this.draw.bind(this);
   }
 
@@ -100,9 +100,15 @@ class TimelineDisplay extends React.Component {
   }
 
   render() {
+    const styles = {
+      root: {
+        width: this.props.width,
+        height: this.props.height,
+      }
+    };
 
     return (
-      <Paper className="timeline-widget">
+      <Paper style={styles.root}>
         <svg id={"timeline" + this.props.wgtId}></svg>
       </Paper>
 

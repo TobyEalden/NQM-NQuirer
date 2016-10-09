@@ -54,8 +54,8 @@ class Login extends React.Component {
   render() {
     var styles = {
       card: {
-        margin: 20,
-        padding: 20
+        margin: "70px 20px 20px 20px",
+        padding: 4
       }
     };
     var loginContent;

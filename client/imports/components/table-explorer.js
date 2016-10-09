@@ -2,6 +2,11 @@ import React from "react";
 import {Meteor} from "meteor/meteor";
 _ = lodash;
 
+import appUtils from "../app-utils";
+import SideBar from "./controls/side-bar";
+import SideBarPanel from "./controls/side-bar-panel";
+import AppMenu from "./controls/app-menu";
+
 import Checkbox from "material-ui/Checkbox";
 import Paper from "material-ui/Paper";
 
@@ -12,7 +17,7 @@ import YearSelector from "./controls/year-selector";
 import AgeBandDisplay from "./controls/age-band-display";
 import AgeBandSelector from "./controls/age-band-selector";
 import TableWidget from "./widgets/table/table-widget";
-
+import * as ColorManipulator from "material-ui/utils/colorManipulator";
 
 class TableExplorer extends React.Component {
 
@@ -115,29 +120,78 @@ class TableExplorer extends React.Component {
   }
 
   render() {
-    return (
-      <div id="table-explorer">
-        <Paper id="table-controls" zDepth={2}>
-          <AgeBandSelector update={this.addAgeBand} age_bands={Meteor.settings.public.age_bands.concat(["All Ages"])} />
-          <AgeBandDisplay update={this.removeAgeBand} selected={this.state.age_bands} />
-          <YearSelector update={this.addYear} years={Meteor.settings.public.years} />
-          <YearDisplay update={this.removeYear} selected={this.state.years} />
-          <LsoaSelector update={this.addLsoa} regionId={this.props.userData.RegionId} />
-          <LsoaDisplay update={this.removeLsoa} selected={this.state.lsoaIds} />
-          <Checkbox id="aggAge" label="Aggregate Age" checked={this.state.aggAge} onCheck={this.updateAggregates} />
-          <Checkbox id="aggGender" label="Aggregate Gender" checked={this.state.aggGender} onCheck={this.updateAggregates} />
-          <Checkbox id="aggLsoas" label="Aggregate LSOAs" checked={this.state.aggLsoas} onCheck={this.updateAggregates} />
-        </Paper>
-        <TableWidget male={this.state.male} female={this.state.female} age_bands={this.state.age_bands} lsoaIds={this.state.lsoaIds} years={this.state.years} popletDatasetId={this.props.userData.PopletDatasetId} aggAge={this.state.aggAge} aggGender={this.state.aggGender} aggLsoas={this.state.aggLsoas} />
-      </div>
+    const styles = {
+      root: {
+        position: "absolute",
+        top: 50,
+        bottom: 0,
+        left: this.props.wideViewMode && this.props.dockedSideBarOpen ? appUtils.constants.ui.dockedNavWidth : 0,
+        right: 0,
+        backgroundColor: ColorManipulator.darken(this.context.muiTheme.palette.canvasColor,0.1)
+      },
+      view: {
+        padding: 4
+      },
+      tableControls: {
+        minWidth: 260,
+        maxWidth: 260,
+        marginRight: 10,
+        padding: 5,
+        marginBottom: 10        
+      },
+      optionsPanel: {
+        paddingLeft: 8,
+        paddingRight: 8
+      }
+    };
 
+    return (
+      <div style={styles.root}>
+        <SideBar  active={this.props.activeSideBar || "menu"}
+                  docked={this.props.dockedSideBarOpen} 
+                  floatingOpen={this.props.floatingSideBarOpen} 
+                  onFloatingOpen={this.props.onToggleNav}>            
+            <SideBarPanel title="menu" value="menu" icon="apps">
+              <AppMenu />
+            </SideBarPanel>
+            <SideBarPanel title="options" value="options" icon="check_box">
+              <div style={styles.optionsPanel}>
+                <AgeBandSelector update={this.addAgeBand} age_bands={Meteor.settings.public.age_bands.concat(["All Ages"])} />
+                <AgeBandDisplay update={this.removeAgeBand} selected={this.state.age_bands} />
+                <YearSelector update={this.addYear} years={Meteor.settings.public.years} />
+                <YearDisplay update={this.removeYear} selected={this.state.years} />
+                <LsoaSelector update={this.addLsoa} regionId={this.props.userData.RegionId} />
+                <LsoaDisplay update={this.removeLsoa} selected={this.state.lsoaIds} />
+                <Checkbox id="aggAge" label="Aggregate Age" checked={this.state.aggAge} onCheck={this.updateAggregates} />
+                <Checkbox id="aggGender" label="Aggregate Gender" checked={this.state.aggGender} onCheck={this.updateAggregates} />
+                <Checkbox id="aggLsoas" label="Aggregate LSOAs" checked={this.state.aggLsoas} onCheck={this.updateAggregates} />
+              </div>
+            </SideBarPanel>
+        </SideBar>
+        <div style={styles.view}>
+          <TableWidget  male={this.state.male} 
+                        female={this.state.female} 
+                        age_bands={this.state.age_bands} 
+                        lsoaIds={this.state.lsoaIds} 
+                        years={this.state.years} 
+                        popletDatasetId={this.props.userData.PopletDatasetId} 
+                        aggAge={this.state.aggAge} 
+                        aggGender={this.state.aggGender} 
+                        aggLsoas={this.state.aggLsoas} 
+                      />
+        </div>
+      </div>
     );
   }
 }
 
-
 TableExplorer.propTypes = {
+  onToggleNav: React.PropTypes.func.isRequired,
   userData: React.PropTypes.object.isRequired // This expects user data
+};
+
+TableExplorer.contextTypes = {
+  muiTheme: React.PropTypes.object  
 };
 
 export default TableExplorer;

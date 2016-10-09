@@ -3,6 +3,7 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: Roboto, sans-serif;
+  background-color: #ddd;
 }
 
 /* disable browser auto-fill highlighting */
@@ -13,18 +14,6 @@ input:-webkit-autofill {
 input:-webkit-autofill:focus {
     -webkit-box-shadow: 0,0 0 0 50px white inset;
     -webkit-text-fill-color: #333;
-}
-
-
-#visual-explorer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-content: flex-start;
-    align-items: flex-start;
-    margin-right: 200px;
-    position: relative;
 }
 
 .year-slider {
@@ -78,10 +67,10 @@ input:-webkit-autofill:focus {
 }
 
 .leaflet-container {
-    min-height: 1080px;
+    height: 100%;
     width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
-    border-radius: 2px;
+    /*box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+    border-radius: 2px;*/
 }
 
 .pyramid-widget {
@@ -190,7 +179,7 @@ input:-webkit-autofill:focus {
     position: relative;
 }
 
-#widgets {
+/*#widgets {
     position: absolute;
     right: 20px;
     display: flex;
@@ -200,7 +189,7 @@ input:-webkit-autofill:focus {
     align-content: flex-start;
     align-items: flex-end;
     width: 330px;
-}
+}*/
 
 .vpp-slider {
     padding: 10px;

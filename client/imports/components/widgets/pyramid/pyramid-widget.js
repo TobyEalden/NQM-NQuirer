@@ -6,7 +6,6 @@ import PyramidContainer from "./pyramid-container";
 class PyramidWidget extends React.Component {
 
   render() {
-    
     const filter = {
       "area_id": {
         "$eq": this.props.lsoaId
@@ -16,10 +15,24 @@ class PyramidWidget extends React.Component {
       }
     };
     let age_bands = this.props.age_bands;
-    if (age_bands[0] === "All Ages" && age_bands.length === 1) age_bands = Meteor.settings.public.age_bands;
+    if (age_bands[0] === "All Ages" && age_bands.length === 1) {
+      age_bands = Meteor.settings.public.age_bands;
+    }
 
     return(
-      <PyramidContainer wgtId={this.props.wgtId} resourceId={this.props.popletDatasetId} filter={filter} options={{limit: 2500}} female={this.props.female} male={this.props.male} age_bands={age_bands} />
+      <PyramidContainer wgtId={this.props.wgtId} 
+                        resourceId={this.props.popletDatasetId} 
+                        filter={filter} 
+                        options={{limit: 2500}} 
+                        female={this.props.female} 
+                        male={this.props.male} 
+                        age_bands={age_bands}
+                        top={this.props.top}
+                        width={this.props.width}
+                        height={this.props.height}
+                        left={this.props.left}
+                        right={this.props.right} 
+                      />
     );
   }
 

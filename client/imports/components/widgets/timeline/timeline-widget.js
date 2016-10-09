@@ -11,7 +11,15 @@ class TimelineWidget extends React.Component {
 
     const pipeline = '[{"$match":{"area_id":{"$eq":"' + this.props.lsoaId + '"},"gender":{"$in":' + JSON.stringify(gender) + '},"age_band":{"$in":' + JSON.stringify(this.props.age_bands) + '}}},{"$group":{"_id":"$year","persons":{"$sum":"$persons"}}}]';
     return (
-      <TimelineContainer resourceId={this.props.popletDatasetId} pipeline={pipeline} wgtId={this.props.wgtId} />
+      <TimelineContainer  resourceId={this.props.popletDatasetId} 
+                          pipeline={pipeline} 
+                          wgtId={this.props.wgtId} 
+                          top={this.props.top}
+                          width={this.props.width}
+                          height={this.props.height}
+                          left={this.props.left}
+                          right={this.props.right} 
+                        />
     );
   }
 

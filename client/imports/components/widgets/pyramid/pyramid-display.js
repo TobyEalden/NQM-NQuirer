@@ -6,22 +6,23 @@ class PyramidDisplay extends React.Component {
 
   constructor(props) {
     super(props);
+    const sideMargin = 4;
     this.state = {
-      width: 280,
-      height: 250,
       margin: {
-        top: 20,
-        right: 20,
+        top: 4,
+        right: sideMargin,
         bottom: 24,
-        left: 20,
-        middle: 28
+        left: sideMargin,
+        middle: 24,
       },
-      regionWidth:  112, // width/2 - margin.middle
-      pointA: 112, // regionwidth
-      pointB: 168 // width - regionwidth
     };
-    this.draw = this.draw.bind(this);
-   
+    this.state.width = props.width - sideMargin*2;
+    this.state.height = props.height - this.state.margin.top - this.state.margin.bottom;
+    this.state.regionWidth = this.state.width/2 - this.state.margin.middle;
+    this.state.pointA = this.state.regionWidth;
+    this.state.pointB = this.state.width - this.state.regionWidth;
+
+    this.draw = this.draw.bind(this);   
   }
 
   translation(x,y) {
@@ -188,17 +189,20 @@ class PyramidDisplay extends React.Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    this.draw(nextProps);
-    
-  
+    this.draw(nextProps);  
   }
 
   render() {
-
+    const styles = {
+      root: {
+        width: this.props.width,
+        height: this.props.height,
+      }
+    };
     return (
-      <Paper className="pyramid-widget">
+      <div style={styles.root}>
         <svg id={"pyramid" + this.props.wgtId}></svg>
-      </Paper>
+      </div>
     );
   }
 

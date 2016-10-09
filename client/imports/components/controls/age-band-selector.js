@@ -17,13 +17,17 @@ class AgeBandSelector extends React.Component {
   }
 
   render() {
-
+    const styles = {
+      root: {
+        width: 200
+      }
+    };
     const options = _.map(this.props.age_bands, (age_band) => {
       return <MenuItem key={age_band} value={age_band} primaryText={age_band} />;
     });
 
     return(
-      <SelectField className="age-band-selector" hintText="Select Age Band(s)" onChange={this.handleChange}>
+      <SelectField style={styles.root} hintText="Select Age Band(s)" onChange={this.handleChange}>
         {options}
       </SelectField>
     );

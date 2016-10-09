@@ -15,13 +15,11 @@ class YearSlider extends React.Component {
   render() {
     const styles = {
       slider: {
-        position: "relative",
-        width: "100%"
       },
       p: {
-        marginTop: "-40px"
+        marginTop: "-50px"
       }
-    }
+    };
     return (
       <div className="year-slider">
         <Slider

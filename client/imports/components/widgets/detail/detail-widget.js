@@ -13,7 +13,15 @@ class DetailWidget extends React.Component {
     };
 
     return (
-      <DetailContainer resourceId={Meteor.settings.public.geojsonId} filter={filter} options={{limit: 1}} /> 
+      <DetailContainer  resourceId={Meteor.settings.public.geojsonId} 
+                        filter={filter} 
+                        options={{limit: 1}} 
+                        top={this.props.top}
+                        width={this.props.width}
+                        height={this.props.height}
+                        left={this.props.left}
+                        right={this.props.right} 
+                      /> 
     );
   }
 

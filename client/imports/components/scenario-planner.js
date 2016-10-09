@@ -4,6 +4,11 @@ import connectionManager from "../connection-manager";
 import TDXApi from "nqm-api-tdx/client-api";
 _ = lodash;
 
+import appUtils from "../app-utils";
+import SideBar from "./controls/side-bar";
+import SideBarPanel from "./controls/side-bar-panel";
+import AppMenu from "./controls/app-menu";
+
 import TextField from "material-ui/TextField";
 import IconButton from 'material-ui/IconButton';
 import Add from "material-ui/svg-icons/content/add";
@@ -177,31 +182,52 @@ class ScenarioPlanner extends React.Component {
   }
 
   render() {
+    const styles = {
+      root: {
+        position: "absolute",
+        top: 50,
+        bottom: 0,
+        left: this.props.wideViewMode && this.props.dockedSideBarOpen ? appUtils.constants.ui.dockedNavWidth : 0,
+        right: 0
+      },
+      planner: {
+        padding: 4
+      }
+    };
 
     return (
-      <div id="scenario-planner">
-        <Paper className="planner-list" zDepth={2} >
-          <ScenarioList resourceId={this.props.userData.ScenariosDatasetId} filter={{}} options={{}} update={this.changeScenario} currentScenario={this.state.scenario} />
-          <TextField hintText="New Scenario Name" value={this.state.scenarioName} errorText={this.state.scenarioError} onChange={this.scenarioName} />
-          
-          <IconButton onClick={this.addScenario}>
-            <Add />
-          </IconButton>
-        </Paper>
-        <Paper className="planner-list" zDepth={2} >
-          <BuildList resourceId={this.props.userData.ScenariosDatasetId} filter={{}} options={{}} currentScenario={this.state.scenario} update={this.openBuild} />
-          <TextField hintText="New Build Name" value={this.state.buildName} errorText={this.state.buildError} onChange={this.buildName} />
-          <IconButton onClick={this.addBuild}>
-            <Add />
-          </IconButton>
-        </Paper>
-        <Snackbar
-          open={this.state.resultPop}
-          message={this.state.message}
-          autoHideDuration={4000}
-          onRequestClose={this.handleRequestClose}
-        />
-          
+      <div style={styles.root}>
+        <SideBar  active={this.props.activeSideBar || "menu"}
+                  docked={this.props.dockedSideBarOpen} 
+                  floatingOpen={this.props.floatingSideBarOpen} 
+                  onFloatingOpen={this.props.onToggleNav}>            
+          <SideBarPanel title="menu" value="menu" icon="apps">
+            <AppMenu />
+          </SideBarPanel>
+        </SideBar>
+        <div style={styles.planner}>
+          <Paper className="planner-list" zDepth={2} >
+            <ScenarioList resourceId={this.props.userData.ScenariosDatasetId} filter={{}} options={{}} update={this.changeScenario} currentScenario={this.state.scenario} />
+            <TextField hintText="New Scenario Name" value={this.state.scenarioName} errorText={this.state.scenarioError} onChange={this.scenarioName} />
+            
+            <IconButton onClick={this.addScenario}>
+              <Add />
+            </IconButton>
+          </Paper>
+          <Paper className="planner-list" zDepth={2} >
+            <BuildList resourceId={this.props.userData.ScenariosDatasetId} filter={{}} options={{}} currentScenario={this.state.scenario} update={this.openBuild} />
+            <TextField hintText="New Build Name" value={this.state.buildName} errorText={this.state.buildError} onChange={this.buildName} />
+            <IconButton onClick={this.addBuild}>
+              <Add />
+            </IconButton>
+          </Paper>
+          <Snackbar
+            open={this.state.resultPop}
+            message={this.state.message}
+            autoHideDuration={4000}
+            onRequestClose={this.handleRequestClose}
+          />            
+        </div>
       </div>
     );
   }
